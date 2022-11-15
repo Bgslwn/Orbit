@@ -5,8 +5,8 @@ import { firebase } from './config';
 
 import Login from "./src/Login";
 import Registration from "./src/Registration";
-import Dashboard from "./src/Dashboard";
-import Header from "./components/Header";
+import UserProfile from "./src/UserProfile";
+//import Header from "./components/Header";
 
 const Stack = createStackNavigator();
 
@@ -32,8 +32,9 @@ function App() {
         <Stack.Screen 
           name="Login" 
           component={Login} 
-          options={{
-            headerTitle: () => <Header name="SASHA JELEK" />,
+          options={{ headerShown: false }}
+          /*options={{
+            headerTitle: () => <false />,
             headerStyle: {
               height:150,
               borderBottomLeftRadius:50,
@@ -42,12 +43,14 @@ function App() {
               shadowColor: '#000',
               elevation:25
             }
-          }}
+          }}*/
         />
         <Stack.Screen 
           name="Registration" 
           component={Registration} 
-          options={{
+          options={{ headerShown: false }}
+
+          /*options={{
             headerTitle: () => <Header name="SASHA JELEK" />,
             headerStyle: {
               height:150,
@@ -57,7 +60,7 @@ function App() {
               shadowColor: '#000',
               elevation:25
             }
-          }}
+          }}*/
         />
       </Stack.Navigator>
     );
@@ -66,9 +69,9 @@ function App() {
   return (
     <Stack.Navigator>
       <Stack.Screen 
-          name="Dashboard" 
-          component={Dashboard} 
-          options={{
+          name="User Profile" 
+          component={UserProfile} 
+          /*options={{
             headerTitle: () => <Header name="SASHA JELEK BANGET ;P" />,
             headerStyle: {
               height:150,
@@ -78,7 +81,7 @@ function App() {
               shadowColor: '#000',
               elevation:25
             }
-          }}
+          }}*/
         />
     </Stack.Navigator>
   );
