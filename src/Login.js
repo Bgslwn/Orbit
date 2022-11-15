@@ -17,41 +17,53 @@ const Login = () => {
     }
 
     return (
-        <View style={StyleSheet.container}>
-            <Text style={{fontWeight: 'bold', fontSize:26}}>
-                Login
-            </Text>
-            <View style={{marginTop:40}}>
-                <TextInput
-                    style={StyleSheet.textInput}
-                    placeholder="Email"
-                    onChangeText={(email) => setEmail(email)}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                />
-                <TextInput
-                    style={StyleSheet.textInput}
-                    placeholder="Password"
-                    onChangeText={(password) => setPassword(password)}
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    secureTextEntry={true}
-                />
+        <View style={{flex:1, backgroundColor:'#73648D'}}>
+
+            <View style={{flex:1,  
+            alignItems:'center', justifyContent:'flex-end', marginBottom:45}}>
+                <View style={styles.card}>
+                    <Text style={styles.title}>
+                        LOGIN
+                    </Text>
+
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Email"
+                        onChangeText={(email) => setEmail(email)}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                    />
+                    
+                    <TextInput
+                        style={styles.input} 
+                        placeholder="Password"
+                        onChangeText={(password) => setPassword(password)}
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        secureTextEntry={true}
+                    />
+                    
+                    <TouchableOpacity
+                        onPress={() => loginUser(email, password)}
+                        style={styles.button}>
+
+                        <Text style={{fontWeight: 'bold', fontSize:18, color:'white'}}>LOGIN</Text>
+                    </TouchableOpacity>
+
+                    <Text style={styles.text}>
+                            Haven't registered yet?
+                    </Text>
+
+                    <TouchableOpacity onPress={() => navigation.navigate('Registration')}>
+                        <Text style={{
+                            marginTop:7,marginBottom:70, fontSize:18, height:25,
+                            textAlign:'center', color:'#4C3575',fontWeight:'bold'}}>
+                            REGISTER
+                        </Text>
+                    </TouchableOpacity>
+
+                </View>
             </View>
-            <TouchableOpacity
-                onPress={() => loginUser(email, password)}
-                style={styles.button}
-            >
-                <Text style={{fontWeight: 'bold', fontSize:22}}>Login</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                onPress={() => navigation.navigate('Registration')}
-                style={{marginTop:20}}
-            >
-                <Text style={{fontWeight: 'bold', fontSize:16}}>
-                    Don't have an account? Register Now
-                </Text>
-            </TouchableOpacity>
         </View>
     )
 }
@@ -59,26 +71,42 @@ const Login = () => {
 export default Login
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
+
+    container:{
+        flex:1, borderRadius:10,
+        justifyContent:'center',
         alignItems:'center',
-        marginTop:100,
     },
-    textInput: {
-        paddingTop:20,
-        paddingBottom:10,
-        width: 400,
-        fontSize:20,
-        borderBottomWidth:1,
-        borderBottomColor:'#000',
-        marginBottom:10,
+
+    card:{
+        flex:0.65, flexWrap:'auto',
+        alignItems:'center', justifyContent:'center', 
+        backgroundColor:"white",
+        width:300, height:100,
+        borderRadius:20,
+    },
+
+    title: {
+        fontWeight: 'bold', fontSize:35, textAlign:'center', marginTop:5, marginBottom:30,
+    },
+
+    input: {
+        marginTop:10, marginBottom:10, width:220,
+        paddingBottom:10, fontSize:13, height:25,
+        borderBottomWidth:1, borderBottomColor:'#000',
+        justifyContent:'center', textAlign:'left',
+    },
+
+    text: {
+        marginTop:7,fontSize:14.5, height:25,
         textAlign:'center',
     },
+
     button:{
-        marginTop:50,
-        height:70,
-        width:250,
-        backgroundColor:'#026efd',
+        marginTop:20, marginBottom:15, 
+        height:50,
+        width:180,
+        backgroundColor:'#4C3575',
         alignItems:'center',
         justifyContent:'center',
         borderRadius:50,
