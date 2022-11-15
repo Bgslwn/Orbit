@@ -1,8 +1,10 @@
 import { Text, View , TouchableOpacity, TextInput, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
+import { useNavigation } from '@react-navigation/native'
 import { firebase } from '../config'
 
 const Registration = () => {
+    const navigation = useNavigation();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [name, setName] = useState('')
@@ -42,39 +44,43 @@ const Registration = () => {
         }))
     }
 
+
+
     return (
-        <View style={StyleSheet.container}>
-            <Text style={{fontWeight: 'bold', fontSize:23}}>
-                Register Here!!
+        <View style={styles.container}>
+
+            <Text style={styles.title}>
+                REGISTER
             </Text>
-            <View style={{marginTop:40}}>
+
+            <View style={{marginTop:10}}>
                 <TextInput
-                    style={styles.textInput}
+                    style={styles.input}
                     placeholder="Name"
                     onChangeText={(name) => setName(name)}
                     autoCorrect={false}
                 />
                 <TextInput
-                    style={styles.textInput}
+                    style={styles.input}
                     placeholder="Age"
                     onChangeText={(age) => setAge(age)}
                     autoCorrect={false}
                 />
                 <TextInput
-                    style={styles.textInput}
+                    style={styles.input}
                     placeholder="Bio"
                     onChangeText={(bio) => setBio(bio)}
                     autoCorrect={false}
                 />
                 
                 <TextInput
-                    style={styles.textInput}
+                    style={styles.input}
                     placeholder="Location"
                     onChangeText={(location) => setLocation(location)}
                     autoCorrect={false}
                 />
                 <TextInput
-                    style={styles.textInput}
+                    style={styles.input}
                     placeholder="Email"
                     onChangeText={(email) => setEmail(email)}
                     autoCapitalize="none"
@@ -82,7 +88,7 @@ const Registration = () => {
                     keyboardType="email-address"
                 />
                 <TextInput
-                    style={styles.textInput}
+                    style={styles.input}
                     placeholder="Password"
                     onChangeText={(password) => setPassword(password)}
                     autoCapitalize="none"
@@ -90,11 +96,24 @@ const Registration = () => {
                     secureTextEntry={true}
                 />
             </View>
+
             <TouchableOpacity
                 onPress={() => registerUser(email, password, name, age, bio, location)}
-                style={styles.button}
-            >
-                <Text style={{fontWeight:'bold', fontSize:22}}>Register</Text>
+                style={styles.button}>
+
+                <Text style={{fontWeight: 'bold', fontSize:18, color:'white'}}>REGISTER</Text>
+            </TouchableOpacity>
+
+            <Text style={styles.text}>
+                    Have an account already?
+            </Text>
+
+            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                <Text style={{
+                    marginTop:7,fontSize:18, height:25,
+                    textAlign:'center', color:'#4C3575',fontWeight:'bold'}}>
+                    LOGIN
+                </Text>
             </TouchableOpacity>
         </View>
     )
@@ -103,26 +122,34 @@ const Registration = () => {
 export default Registration
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 0.5,
+
+    container:{
+        flex:1,
+        justifyContent:'center',
         alignItems:'center',
-        marginTop:50,
     },
-    textInput: {
-        paddingTop:20,
-        paddingBottom:10,
-        width: 400,
-        fontSize:20,
-        borderBottomWidth:1,
-        borderBottomColor:'#000',
-        marginBottom:10,
+
+    title: {
+        fontWeight: 'bold', fontSize:40, textAlign:'center', marginTop:50, marginBottom:20,
+    },
+
+    input: {
+        marginTop:10, marginBottom:10, width:220,
+        paddingBottom:5, fontSize:13, height:20,
+        borderBottomWidth:1, borderBottomColor:'#000',
+        justifyContent:'center', textAlign:'left',
+    },
+
+    text: {
+        marginTop:7,fontSize:14.5, height:25,
         textAlign:'center',
     },
+
     button:{
-        marginTop:50,
-        height:70,
-        width:250,
-        backgroundColor:'#026efd',
+        marginTop:20, marginBottom:15, 
+        height:50,
+        width:180,
+        backgroundColor:'#4C3575',
         alignItems:'center',
         justifyContent:'center',
         borderRadius:50,
