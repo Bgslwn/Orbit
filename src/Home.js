@@ -3,7 +3,21 @@ import React, {useState, useEffect} from 'react'
 import {firebase} from '../config'
 import Swiper from 'react-native-deck-swiper'
 
- 
+const Item = ({ item, onPress, connect}) => (
+  <View style = {styles.innerContainer}>
+    <Text style={styles.itemName}>{item.name}</Text>
+    <Text style={styles.itemName}>{item.age}</Text>
+    <Text style={styles.itemName}>{item.bio}</Text>
+    <Text style={styles.itemName}>{item.location}</Text>
+    <TouchableOpacity
+      style={styles.button}
+      onPress = {onPress}
+    >
+    <Text style={{color: 'white'}}>{connect}</Text>
+    </TouchableOpacity>
+  </View>
+);
+
 const Home = () => {
     const [users, setUsers] = useState ([]);
     const todoRef = firebase.firestore().collection('users');
@@ -49,7 +63,25 @@ const Home = () => {
   // const [index, setIndex] = React.useState(0);
 
   // const onPress = () => setConnect(connect == "Connect" ? "Connected" : "Connect");
-  const [connect, setConnect] = useState("Display");
+  const [selectedId, setSelectedId] = useState(null);
+
+  const renderItem = ({ item }) => {
+    const backgroundColor = item.id === selectedId ? "#6e3b6e" : "#f9c2ff";
+    const color = item.id === selectedId ? 'white' : 'black';
+    const connect = item.id === selectedId ? 'Connected' : 'Connect';
+
+    return (
+      <Item
+        item={item}
+        onPress={() => {setSelectedId(item.id)}}
+        connect={ connect }
+        backgroundColor={{ backgroundColor }}
+        textColor={{ color }}
+      />
+    );
+  };
+
+  
   
   return (
     
@@ -58,20 +90,9 @@ const Home = () => {
         style = {{height:'100%', color:'blue'}}
         data = {users}
         numColumns={1}
-        renderItem={({item}) => (
-            <View style={styles.innerContainer}>
-              <Text style={styles.itemName}>{item.name}</Text>
-              <Text style={styles.itemName}>{item.age}</Text>
-              <Text style={styles.itemName}>{item.bio}</Text>
-              <Text style={styles.itemName}>{item.location}</Text>
-              <TouchableOpacity
-                style={styles.button}
-                onPress = {() => setConnect(connect == "Display" ? 'Connected Now!' : 'Connect')}
-              >
-                <Text>{connect}</Text>
-              </TouchableOpacity>
-            </View>
-        )}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+        extraData={selectedId}
       />
 
       {/* <Swiper
@@ -94,7 +115,7 @@ const styles = StyleSheet.create({
   innerContainer: {
     width: 350,
     height: 130,
-    backgroundColor: '#E5D9B6',
+    backgroundColor: '#f2f2f2',
     borderRadius: 10,
     alignItems: 'center',
     marginBottom: 20,
@@ -102,7 +123,7 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 5,
-    backgroundColor: "#A4BE7B",
+    backgroundColor: "#4c3575",
     // paddingTop: 10,
     // paddingBottom: 10,
     paddingVertical: 8,

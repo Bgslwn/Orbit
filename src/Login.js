@@ -42,7 +42,7 @@ const Login = () => {
                 onPress={() => loginUser(email, password)}
                 style={styles.button}
             >
-                <Text style={{fontWeight: 'bold', fontSize:22}}>Login</Text>
+                <Text style={{fontWeight: 'bold', fontSize:22, color: 'white'}}>LOG IN</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 onPress={() => navigation.navigate('Registration')}
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
         marginTop:50,
         height:70,
         width:250,
-        backgroundColor:'#026efd',
+        backgroundColor:'#4c3575',
         alignItems:'center',
         justifyContent:'center',
         borderRadius:50,

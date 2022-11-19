@@ -43,7 +43,7 @@ const Registration = () => {
     }
 
     return (
-        <View style={StyleSheet.container}>
+        <View style={styles.container}>
             <Text style={{fontWeight: 'bold', fontSize:23}}>
                 Register Here!!
             </Text>
@@ -94,7 +94,7 @@ const Registration = () => {
                 onPress={() => registerUser(email, password, name, age, bio, location)}
                 style={styles.button}
             >
-                <Text style={{fontWeight:'bold', fontSize:22}}>Register</Text>
+                <Text style={{fontWeight:'bold', fontSize:22, color: 'white'}}>Register</Text>
             </TouchableOpacity>
         </View>
     )
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 0.5,
         alignItems:'center',
-        marginTop:50,
+        marginTop:30,
     },
     textInput: {
         paddingTop:20,
@@ -119,10 +119,10 @@ const styles = StyleSheet.create({
         textAlign:'center',
     },
     button:{
-        marginTop:50,
+        marginTop:30,
         height:70,
         width:250,
-        backgroundColor:'#026efd',
+        backgroundColor:'#4c3575',
         alignItems:'center',
         justifyContent:'center',
         borderRadius:50,
