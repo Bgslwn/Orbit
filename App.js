@@ -7,6 +7,7 @@ import Login from "./src/Login";
 import Registration from "./src/Registration";
 import Dashboard from "./src/Dashboard";
 import Header from "./components/Header";
+import Home from "./src/Home";
 
 const Stack = createStackNavigator();
 
@@ -66,19 +67,9 @@ function App() {
   return (
     <Stack.Navigator>
       <Stack.Screen 
-          name="Dashboard" 
-          component={Dashboard} 
-          options={{
-            headerTitle: () => <Header name="SASHA JELEK BANGET ;P" />,
-            headerStyle: {
-              height:150,
-              borderBottomLeftRadius:50,
-              borderBottomRightRadius:50,
-              backgroundColor:'#00e4d0',
-              shadowColor: '#000',
-              elevation:25
-            }
-          }}
+          name="Home" 
+          component={Home} 
+          
         />
     </Stack.Navigator>
   );

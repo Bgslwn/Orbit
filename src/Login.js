@@ -17,20 +17,20 @@ const Login = () => {
     }
 
     return (
-        <View style={StyleSheet.container}>
+        <View style={styles.container}>
             <Text style={{fontWeight: 'bold', fontSize:26}}>
                 Login
             </Text>
             <View style={{marginTop:40}}>
                 <TextInput
-                    style={StyleSheet.textInput}
+                    style={styles.textInput}
                     placeholder="Email"
                     onChangeText={(email) => setEmail(email)}
                     autoCapitalize="none"
                     autoCorrect={false}
                 />
                 <TextInput
-                    style={StyleSheet.textInput}
+                    style={styles.textInput}
                     placeholder="Password"
                     onChangeText={(password) => setPassword(password)}
                     autoCapitalize="none"
