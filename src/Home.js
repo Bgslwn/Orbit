@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable, FlatList, SafeAreaView } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Pressable, FlatList, SafeAreaView } from 'react-native'
 import React, {useState, useEffect} from 'react'
 import {firebase} from '../config'
 import Swiper from 'react-native-deck-swiper'
@@ -15,12 +15,13 @@ const Home = () => {
           querySnapshot => {
             const users = []
             querySnapshot.forEach((doc) => {
-              const { name, age, bio } = doc.data()
+              const { name, age, bio, location } = doc.data()
               users.push({
                 id: doc.id,
                 name,
                 age,
                 bio,
+                location,
               })
             })
             setUsers(users)
@@ -29,9 +30,29 @@ const Home = () => {
       })();
 
     }, [])
+  
+  // const Card = ({ card }) => (
+  //   <View style={styles.innerContainer}>
+  //     <Text style={styles.itemName}>{card.name}</Text>
+  //     <Text style={styles.itemName}>{card.age}</Text>
+  //     <Text style={styles.itemName}>{card.bio}</Text>
+  //     <Text style={styles.itemName}>{card.location}</Text>
+  //     <TouchableOpacity
+  //       style={styles.button}
+  //       onPress={onPress}
+  //     >
+  //       <Text>{count}</Text>
+  //     </TouchableOpacity>
+  //   </View>
+  // );
+  
+  // const [index, setIndex] = React.useState(0);
 
+  // const onPress = () => setConnect(connect == "Connect" ? "Connected" : "Connect");
+  const [connect, setConnect] = useState("Display");
+  
   return (
-
+    
     <View style = {styles.container}>
       <FlatList
         style = {{height:'100%', color:'blue'}}
@@ -42,11 +63,22 @@ const Home = () => {
               <Text style={styles.itemName}>{item.name}</Text>
               <Text style={styles.itemName}>{item.age}</Text>
               <Text style={styles.itemName}>{item.bio}</Text>
-
+              <Text style={styles.itemName}>{item.location}</Text>
+              <TouchableOpacity
+                style={styles.button}
+                onPress = {() => setConnect(connect == "Display" ? 'Connected Now!' : 'Connect')}
+              >
+                <Text>{connect}</Text>
+              </TouchableOpacity>
             </View>
         )}
       />
 
+      {/* <Swiper
+        cards={users}
+        cardIndex={index}
+        renderCard={card => <Card card={card} />}
+      /> */}
     </View>
   )
 }
@@ -61,46 +93,21 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     width: 350,
-    height: 60,
+    height: 130,
     backgroundColor: '#E5D9B6',
     borderRadius: 10,
     alignItems: 'center',
-    marginBottom: 20
+    marginBottom: 20,
+    justifyContent: 'center'
   },
-  itemName: {
+  button: {
+    marginTop: 5,
+    backgroundColor: "#A4BE7B",
+    // paddingTop: 10,
+    // paddingBottom: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 5,
+    borderRadius: 5
 
-  },
-  swiperContainer: {
-    flex: 0.55
-  },
-  bottomContainer: {
-    flex: 0.45,
-    justifyContent: 'space-evenly'
-  },
-  bottomContainerMeta: { alignContent: 'flex-end', alignItems: 'center' },
-  bottomContainerButtons: {
-    flexDirection: 'row',
-    justifyContent: 'space-evenly'
-  },
-  cardImage: {
-    width: 160,
-    flex: 1,
-    resizeMode: 'contain'
-  },
-  card: {
-    flex: 0.45,
-    borderRadius: 8,
-    shadowRadius: 25,
-    shadowColor: 'black',
-    shadowOpacity: 0.08,
-    shadowOffset: { width: 0, height: 0 },
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'black'
-  },
-  text: {
-    textAlign: 'center',
-    fontSize: 50,
-    backgroundColor: 'transparent'
   },
 });
